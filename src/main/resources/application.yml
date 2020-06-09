@@ -1,0 +1,73 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+files:
+  storage:
+    directory: /myfile
+
+# datasource config
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo?characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      maximum-pool-size: 5
+      data-source-properties:
+        useInformationSchema: true
+        nullCatalogMeansCurrent: true
+
+  main:
+    allow-bean-definition-overriding: true
+
+# devtools config
+diboot:
+  devtools:
+    codes-author: 陈永鹏
+    codes-copyright: hcr
+    codes-version: 1.0.0
+    output-path-entity: diboot-demo/src/main/java/com/chen/app/entity/
+    output-path-vo: diboot-demo/src/main/java/com/chen/app/vo/
+    output-path-service: diboot-demo/src/main/java/com/chen/app/service/
+    output-path-mapper: diboot-demo/src/main/java/com/chen/app/mapper/
+    output-path-controller: diboot-demo/src/main/java/com/chen/app/controller/
+    output-path-sql: diboot-demo/src/main/resources/
+    enable-lombok: true
+    enable-swagger: true
+    generate-mapper-xml: true
+  iam:
+    jwt-signkey: Diboot
+    jwt-token-expires-minutes: 60 #JWT的token过期时间（分），默认为60分钟
+    anon-urls: /test/**,/doc.html,app/swagger-resources/**,/webjars/**,/favicon.ico # Shiro的匿名urls，用逗号分隔
+    cache-manager-class: com.chen.app.config.ShiroRedisCacheManager
+
+
+# logging config
+logging:
+  level:
+    root: info
+    org:
+      apache: info
+      hibernate:
+        validator: info
+      springframework: info
+    com:
+      zaxxer:
+        hikari: info
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+
